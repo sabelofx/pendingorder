@@ -220,22 +220,22 @@ void Trail()
                   case OP_BUY  :
                      MarketPrice=MarketInfo(Symbol(),MODE_ASK);
                      BuyPrice=OrderOpenPrice();
-                     if(MarketPrice-BuyPrice>BuyStop*calcDigitFactor(Symbol()))
+                     if(MarketPrice-BuyPrice>TrailingStop*calcDigitFactor(Symbol()))
                        {
-                        BuyPrice=MarketPrice+(BuyStop*calcDigitFactor(Symbol()));
+                        BuyPrice=MarketPrice+(TrailingStop*calcDigitFactor(Symbol()));
                         SL=BuyPrice-(TrailingStop*calcDigitFactor(Symbol()));
-                        if(OrderStopLoss()!=SL)
+                        if(SL>OrderStopLoss())
                            if(OrderModify(OrderTicket(),OrderOpenPrice(),SL,OrderTakeProfit(),OrderExpiration(),clrNONE)==false)
                               GetLastError();
                        }
                   case OP_SELL :
                      MarketPrice=MarketInfo(Symbol(),MODE_BID);
                      SellPrice=OrderOpenPrice();
-                     if(SellPrice-MarketPrice>SellStop*calcDigitFactor(Symbol()))
+                     if(SellPrice-MarketPrice>TrailingStop*calcDigitFactor(Symbol()))
                        {
-                        SellPrice=MarketPrice-(SellStop*calcDigitFactor(Symbol()));
+                        SellPrice=MarketPrice-(TrailingStop*calcDigitFactor(Symbol()));
                         SL=SellPrice+(TrailingStop*calcDigitFactor(Symbol()));
-                        if(OrderStopLoss()!=SL)
+                        if(SL<OrderStopLoss())
                            if(OrderModify(OrderTicket(),OrderOpenPrice(),SL,OrderTakeProfit(),OrderExpiration(),clrNONE)==false)
                               GetLastError();
                        }
