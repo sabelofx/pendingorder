@@ -1,7 +1,7 @@
 # README #
 ## Pending Order EA
 
-The code in here is to be ran inside MetaTrader 4
+The code in here is to be run inside MetaTrader 4
 
 ### What is this repository for? ###
 
