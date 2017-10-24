@@ -113,7 +113,7 @@ void Trade()
    if(Lots!=0.0)
       LotSize=Lots;
    else
-      LotSize=calculateLots(Symbol(),StopLoss,RiskPercent,calcDigitFactor(Symbol()));
+      LotSize=calculateLots(Symbol(),StopLoss*calcDigitFactor(Symbol()),RiskPercent,calcDigitFactor(Symbol()));
 
    if(TakeProfit > 0.0 && TakeProfit<=TrailingStop)
       msg="(TP will hit before Trailing begins)";
@@ -222,8 +222,7 @@ void Trail()
                      BuyPrice=OrderOpenPrice();
                      if(MarketPrice-BuyPrice>TrailingStop*calcDigitFactor(Symbol()))
                        {
-                        BuyPrice=MarketPrice+(TrailingStop*calcDigitFactor(Symbol()));
-                        SL=BuyPrice-(TrailingStop*calcDigitFactor(Symbol()));
+                        SL=MarketPrice-(TrailingStop*calcDigitFactor(Symbol()));
                         if(SL>OrderStopLoss())
                            if(OrderModify(OrderTicket(),OrderOpenPrice(),SL,OrderTakeProfit(),OrderExpiration(),clrNONE)==false)
                               GetLastError();
@@ -233,8 +232,7 @@ void Trail()
                      SellPrice=OrderOpenPrice();
                      if(SellPrice-MarketPrice>TrailingStop*calcDigitFactor(Symbol()))
                        {
-                        SellPrice=MarketPrice-(TrailingStop*calcDigitFactor(Symbol()));
-                        SL=SellPrice+(TrailingStop*calcDigitFactor(Symbol()));
+                        SL=MarketPrice+(TrailingStop*calcDigitFactor(Symbol()));
                         if(SL<OrderStopLoss())
                            if(OrderModify(OrderTicket(),OrderOpenPrice(),SL,OrderTakeProfit(),OrderExpiration(),clrNONE)==false)
                               GetLastError();
