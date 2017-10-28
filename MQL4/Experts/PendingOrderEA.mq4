@@ -39,8 +39,8 @@ extern double
 BuyStop=60.0,
 SellStop=60.0,
 TakeProfit=300.0,
-StopLoss=300.0,
-TrailingStop=300.0;
+StopLoss=100.0,
+TrailingStop=100.0;
 
 extern string
 _____Risk_Settings_____="---------- Risk Settings (Set One) ----------";
@@ -109,7 +109,6 @@ void OnTick()
 //+------------------------------------------------------------------+
 void Trade()
   {
-
    if(Lots!=0.0)
       LotSize=Lots;
    else
@@ -249,13 +248,9 @@ void Trail()
 void CleanUp()
   {
    if(totalTradesBySymbMagicCmt(Symbol(),MagicNumber,TicketCmt,"PENDING")==1 && BuyTrades && SellTrades)
-     {
-      total=0;
       for(count=0;count<OrdersTotal();count++)
-        {
          if(OrderSelect(count,SELECT_BY_POS,MODE_TRADES)==true)
             if((OrderType()==OP_SELLSTOP || OrderType()==OP_BUYSTOP) && OrderSymbol()==Symbol() && OrderMagicNumber()==MagicNumber && OrderComment()==TicketCmt)
-              {
                switch(OrderType())
                  {
                   case OP_BUYSTOP  :
@@ -265,8 +260,5 @@ void CleanUp()
                      if(OrderDelete(OrderTicket())==false)
                      GetLastError();
                  }
-              }
-        }
-     }
   }
 //+------------------------------------------------------------------+

@@ -15,7 +15,6 @@ double p2p=0.0; // Point to Pips
 //+------------------------------------------------------------------+
 double calcDigitFactor(string smb) export
   {
-
    if(MarketInfo(smb,MODE_DIGITS)==2 || MarketInfo(smb,MODE_DIGITS)==4)
       p2p=MarketInfo(smb,MODE_POINT)*0.1;
    else if(MarketInfo(smb,MODE_DIGITS)==3 || MarketInfo(smb,MODE_DIGITS)==5)
@@ -29,6 +28,5 @@ double calcDigitFactor(string smb) export
       p2p=p2p*10;
 
    return p2p;
-
   }
 //+------------------------------------------------------------------+

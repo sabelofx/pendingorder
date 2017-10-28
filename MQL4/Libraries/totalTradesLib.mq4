@@ -21,13 +21,10 @@ int totalTradesBySymb(string symb) export
   {
    total=0;
    for(count=0;count<OrdersTotal();count++)
-     {
       if(OrderSelect(count,SELECT_BY_POS,MODE_TRADES)==true)
-        {
          if(OrderType()<=OP_SELLSTOP && OrderSymbol()==symb)
             total++;
-        }
-     }
+            
    return(total);
   }
 //+-------------------------------------------------------------------------------+
@@ -37,13 +34,10 @@ int totalTradesBySymbMagic(string symb,int MagicNumber) export
   {
    total=0;
    for(count=0;count<OrdersTotal();count++)
-     {
       if(OrderSelect(count,SELECT_BY_POS,MODE_TRADES)==true)
-        {
          if(OrderType()<=OP_SELLSTOP && OrderSymbol()==symb && OrderMagicNumber()==MagicNumber)
             total++;
-        }
-     }
+            
    return(total);
   }
 //+----------------------------------------------------------------------------------------+
@@ -55,21 +49,14 @@ int totalTradesBySymbMagicCmt(string symb,int MagicNumber,string cmt,string type
    for(count=0;count<OrdersTotal();count++)
      {
       if(type=="ALL")
-        {
          if(OrderSelect(count,SELECT_BY_POS,MODE_TRADES)==true)
-           {
             if(OrderType()<=OP_SELLSTOP && OrderSymbol()==symb && OrderMagicNumber()==MagicNumber && OrderComment()==cmt)
                total++;
-           }
-        }
+               
       else if(type=="PENDING")
-        {
          if(OrderSelect(count,SELECT_BY_POS,MODE_TRADES)==true)
-           {
             if((OrderType()==OP_SELLSTOP || OrderType()==OP_BUYSTOP) && OrderSymbol()==symb && OrderMagicNumber()==MagicNumber && OrderComment()==cmt)
                total++;
-           }
-        }
      }
    return(total);
   }

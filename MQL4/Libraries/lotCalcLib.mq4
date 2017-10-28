@@ -22,7 +22,6 @@ double calculateLots(string symb,double pips,double risk,double digitFactor) exp
       lotNorm=1;
 
    Lots=(((risk*AccountBalance()*0.01)-comm)*digitFactor)/(pips*MarketInfo(symb,MODE_TICKVALUE));
-   //Lots=(((risk*5000.00*0.01)-comm)*digitFactor)/(pips*MarketInfo(symb,MODE_TICKVALUE));
 
    if(Lots<MarketInfo(symb,MODE_MINLOT))
       Lots=MarketInfo(symb,MODE_MINLOT);
